@@ -1,6 +1,26 @@
+const fs = require("fs");
+const mayors = require("./../models/mayors.json");
+
 exports.handler = async function (event, context) {
   console.log("headers", event.headers);
-  console.log("multiValueHeaders", event.multiValueHeaders);
+
+  const channel = event.headers["nightbot-channel"]
+    ? event.headers["nightbot-channel"].split("&")[0].split("=")[1]
+    : "default";
+
+  const mayor = event.queryStringParameters["mayor"];
+
+  if (channel === "default") {
+    mayors[event.headers["nightbot-channel"].split("&")[0].split("=")[1]] = [
+      mayor,
+    ];
+  } else {
+    mayors[event.headers["nightbot-channel"].split("&")[0].split("=")[1]].push(
+      mayor
+    );
+  }
+
+  fs.writeFile("./../models/mayors.json", JSON.stringify(mayors, null, 2));
 
   return {
     statusCode: 200,
