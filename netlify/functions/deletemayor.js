@@ -4,6 +4,6 @@ exports.handler = async function (event, context) {
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: "Here are your mayors" }),
+    body: JSON.stringify({ message: "Deleted mayor: X" }),
   };
 };
