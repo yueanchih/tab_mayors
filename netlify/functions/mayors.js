@@ -1,9 +1,13 @@
+const mayors = require("./../models/mayors.json");
+
 exports.handler = async function (event, context) {
-  console.log("headers", event.headers);
-  console.log("multiValueHeaders", event.multiValueHeaders);
+  const channel =
+    event.headers["nightbot-channel"]?.split("&")[0].split("=")[1] || "default";
+
+  console.log(mayors[channel]);
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: "Here are your mayors" }),
+    body: JSON.stringify(mayors[channel]),
   };
 };
