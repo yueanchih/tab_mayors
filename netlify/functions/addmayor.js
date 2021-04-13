@@ -20,7 +20,14 @@ exports.handler = async function (event, context) {
     );
   }
 
-  fs.writeFile("./../models/mayors.json", JSON.stringify(mayors, null, 2));
+  fs.writeFile(
+    "./../models/mayors.json",
+    JSON.stringify(mayors, null, 2),
+    (err) => {
+      if (err) throw err;
+      console.log("Data written to file");
+    }
+  );
 
   return {
     statusCode: 200,
