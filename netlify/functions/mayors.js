@@ -14,11 +14,11 @@ exports.handler = async function (event, context, callback) {
     .query(q.Get(q.Ref(q.Collection("mayors"), "101")))
     .then((response) => {
       const jj = response.data[channel] || [];
-      console.log("response", Array.isArray(jj) ? jj.join(", ") : jj);
+      console.log("response", jj);
 
       return {
         statusCode: 200,
-        body: Array.isArray(jj) ? jj.join(", ") : jj,
+        body: jj,
       };
     })
     .catch((error) => {
