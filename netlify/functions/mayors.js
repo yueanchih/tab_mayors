@@ -20,7 +20,7 @@ exports.handler = async function (event, context, callback) {
     .then((response) => {
       const jj = response.data.length
         ? [(response.data[0].data.mayors || []).join(", ")]
-        : [];
+        : ["No mayors. Try !addmayor name"];
       console.log("mayors: ", jj);
 
       return {
