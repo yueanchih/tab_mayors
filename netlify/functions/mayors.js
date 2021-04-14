@@ -10,11 +10,16 @@ exports.handler = async function (event, context, callback) {
     ? event.headers["nightbot-channel"].split("&")[0].split("=")[1]
     : "default";
 
+  const faunaDBQuery = q.Map(
+    q.Paginate(q.Match(q.Index("mayors_by_channel"), channel)),
+    q.Lambda("mayors_by_channel", q.Get(q.Var("mayors_by_channel")))
+  );
+
   return client
-    .query(q.Get(q.Ref(q.Collection("mayors"), "101")))
+    .query(faunaDBQuery)
     .then((response) => {
-      const jj = [(response.data[channel] || []).join(", ")];
-      console.log("response", jj);
+      const jj = [(response.data[0].data.mayors || []).join(", ")];
+      console.log("mayors: ", jj);
 
       return {
         statusCode: 200,
