@@ -1,9 +1,11 @@
-const fs = require("fs");
-const mayors = require("./../models/mayors.json");
+const faunadb = require("faunadb");
+
+const q = faunadb.query;
+const client = new faunadb.Client({
+  secret: process.env.FAUNADB_SERVER_SECRET,
+});
 
 exports.handler = async function (event, context) {
-  console.log("headers", event.queryStringParameters);
-
   if (event.headers["nightbot-channel"]) {
     const channel =
       event.headers["nightbot-channel"].split("&")[0].split("=")[1] ||
@@ -23,14 +25,8 @@ exports.handler = async function (event, context) {
       mayor
     );
 
-    fs.writeFileSync(
-      __dirname + "/../models/mayors.json",
-      JSON.stringify(mayors, null, 2),
-      (err) => {
-        if (err) throw err;
-        console.log("Data written to file");
-      }
-    );
+    // todo: each streamer gets a document, instead of one document holding everyone
+    // headache, but a good project :)
 
     return {
       statusCode: 200,
