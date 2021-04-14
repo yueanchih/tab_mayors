@@ -7,31 +7,64 @@ const client = new faunadb.Client({
 
 exports.handler = async function (event, context) {
   if (event.headers["nightbot-channel"]) {
-    const channel =
-      event.headers["nightbot-channel"].split("&")[0].split("=")[1] ||
-      "default";
+    const channel = event.headers["nightbot-channel"]
+      .split("&")[0]
+      .split("=")[1];
 
     const mayor = event.queryStringParameters["mayor"];
 
-    if (
-      !mayors[event.headers["nightbot-channel"].split("&")[0].split("=")[1]]
-    ) {
-      mayors[
-        event.headers["nightbot-channel"].split("&")[0].split("=")[1]
-      ] = [];
-    }
+    let faunaDBQuery;
 
-    mayors[event.headers["nightbot-channel"].split("&")[0].split("=")[1]].push(
-      mayor
+    const mayorsQuery = q.Map(
+      q.Paginate(q.Match(q.Index("mayors_by_channel"), channel)),
+      q.Lambda("mayors_by_channel", q.Get(q.Var("mayors_by_channel")))
     );
 
-    // todo: each streamer gets a document, instead of one document holding everyone
-    // headache, but a good project :)
+    const mayors = await client.query(mayorsQuery).then((response) => {
+      return response.data;
+    });
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: "Added mayor: X" }),
-    };
+    if (mayors && Boolean(mayors.length)) {
+      faunaDBQuery = q.Map(
+        q.Paginate(q.Match(q.Index("mayors_by_channel"), channel)),
+        q.Lambda(
+          "mayors_by_channel",
+          q.Update(q.Var("mayors_by_channel"), {
+            data: {
+              channel: channel,
+              mayors: [...mayors[0].data.mayors, mayor],
+            },
+          })
+        )
+      );
+    } else {
+      faunaDBQuery = q.Create(q.Collection("mayors"), {
+        data: { channel: channel, mayors: [mayor] },
+      });
+    }
+
+    return client
+      .query(faunaDBQuery)
+      .then((response) => {
+        const jj = response.data.length
+          ? [(response.data[0].data.mayors || []).join(", ")]
+          : [];
+        console.log("mayors: ", jj);
+
+        return {
+          statusCode: 200,
+          // body: JSON.stringify(jj),
+          body: JSON.stringify({ message: "Added mayor: " + mayor }),
+        };
+      })
+      .catch((error) => {
+        console.log("error", error);
+
+        return callback(null, {
+          statusCode: 400,
+          body: JSON.stringify(error),
+        });
+      });
   }
 
   return {
