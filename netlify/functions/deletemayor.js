@@ -39,7 +39,7 @@ exports.handler = async function (event, context, callback) {
           q.Update(q.Var("mayors_by_channel"), {
             data: {
               channel: channel,
-              mayors: [mayors[0].data.mayors],
+              mayors: mayors[0].data.mayors,
             },
           })
         )
