@@ -54,7 +54,7 @@ exports.handler = async function (event, context) {
         return {
           statusCode: 200,
           // body: JSON.stringify(jj),
-          body: JSON.stringify({ message: "Added mayor: " + mayor }),
+          body: JSON.stringify("Added mayor: " + mayor),
         };
       })
       .catch((error) => {
