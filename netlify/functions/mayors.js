@@ -15,7 +15,7 @@ exports.handler = async function (event, context, callback) {
     .then((response) => {
       return {
         statusCode: 200,
-        body: response.data[channel].join(", "),
+        body: (response.data[channel] || []).join(", "),
       };
     })
     .catch((error) => {
