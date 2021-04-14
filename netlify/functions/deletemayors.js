@@ -27,13 +27,6 @@ exports.handler = async function (event, context) {
     return client
       .query(faunaDBQuery)
       .then((response) => {
-        console.log("1 response", JSON.stringify(response));
-
-        // const jj = response.data.length
-        //   ? [(response.data[0].data.mayors || []).join(", ")]
-        //   : [];
-        // console.log("mayors: ", jj);
-
         return {
           statusCode: 200,
           body: JSON.stringify("Mayors fired."),
