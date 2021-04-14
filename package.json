@@ -1,0 +1,22 @@
+{
+  "name": "tab-mayors-api",
+  "version": "1.0.0",
+  "description": "This is going to be an API for bots like nightbot to communicate between a server API to maintain the mayors.\r Essentially it has to be an array of strings.\r Be patient until this gets cooked 👨‍🍳",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darvishzadeh/tab_mayors.git"
+  },
+  "author": "Sonny Darvishzadeh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darvishzadeh/tab_mayors/issues"
+  },
+  "homepage": "https://github.com/darvishzadeh/tab_mayors#readme",
+  "dependencies": {
+    "faunadb": "^4.2.0"
+  }
+}
