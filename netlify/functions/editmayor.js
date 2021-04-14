@@ -9,7 +9,7 @@ exports.handler = async function (event, context, callback) {
   if (event.headers["nightbot-channel"]) {
     const channel = event.headers["nightbot-channel"].split("&")[0].split("=")[1];
 
-    const mayorIndex = event.queryStringParameters["mayor_index_mayor_name"].split(/ (.+)/)[0];
+    const mayorIndex = event.queryStringParameters["mayor_index_mayor_name"].split(/ (.+)/)[0] - 1;
     const mayor = event.queryStringParameters["mayor_index_mayor_name"].split(/ (.+)/)[1];
 
     let faunaDBQuery;
