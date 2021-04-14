@@ -7,9 +7,7 @@ const client = new faunadb.Client({
 
 exports.handler = async function (event, context) {
   if (event.headers["nightbot-channel"]) {
-    const channel = event.headers["nightbot-channel"]
-      .split("&")[0]
-      .split("=")[1];
+    const channel = event.headers["nightbot-channel"].split("&")[0].split("=")[1];
 
     const mayor = event.queryStringParameters["mayor"];
 
@@ -46,9 +44,7 @@ exports.handler = async function (event, context) {
     return client
       .query(faunaDBQuery)
       .then((response) => {
-        const jj = response.data.length
-          ? [(response.data[0].data.mayors || []).join(", ")]
-          : [];
+        const jj = response.data.length ? [(response.data[0].data.mayors || []).join(", ")] : [];
         console.log("mayors: ", jj);
 
         return {

@@ -6,9 +6,7 @@ const client = new faunadb.Client({
 });
 
 exports.handler = async function (event, context, callback) {
-  const channel = event.headers["nightbot-channel"]
-    ? event.headers["nightbot-channel"].split("&")[0].split("=")[1]
-    : "default";
+  const channel = event.headers["nightbot-channel"] ? event.headers["nightbot-channel"].split("&")[0].split("=")[1] : "default";
 
   const faunaDBQuery = q.Map(
     q.Paginate(q.Match(q.Index("mayors_by_channel"), channel)),
