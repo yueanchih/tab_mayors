@@ -13,6 +13,9 @@ exports.handler = async function (event, context, callback) {
   return client
     .query(q.Get(q.Ref(q.Collection("mayors"), "101")))
     .then((response) => {
+      console.log("response", response);
+      console.log(response.data[channel] || []).join(", ");
+
       return {
         statusCode: 200,
         body: (response.data[channel] || []).join(", "),
@@ -20,6 +23,7 @@ exports.handler = async function (event, context, callback) {
     })
     .catch((error) => {
       console.log("error", error);
+
       return callback(null, {
         statusCode: 400,
         body: JSON.stringify(error),
