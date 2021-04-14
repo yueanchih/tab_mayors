@@ -13,7 +13,7 @@ exports.handler = async function (event, context, callback) {
   return client
     .query(q.Get(q.Ref(q.Collection("mayors"), "101")))
     .then((response) => {
-      const jj = response.data[channel] || [];
+      const jj = [(response.data[channel] || []).join(", ")];
       console.log("response", jj);
 
       return {
