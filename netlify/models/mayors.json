@@ -1,4 +1,5 @@
 {
   "default": ["No mayors. Try adding them; e.g. !addmayor mayor_name"],
-  "pythqn": ["Good Wood Kreygasm", "Less Energy Needed SeemsGood"]
+  "pythqn": ["Good Wood Kreygasm", "Less Energy Needed SeemsGood"],
+  "shad3less": ["test"]
 }
