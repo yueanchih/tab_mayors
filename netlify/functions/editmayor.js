@@ -7,12 +7,10 @@ const client = new faunadb.Client({
 
 exports.handler = async function (event, context, callback) {
   if (event.headers["nightbot-channel"]) {
-    const channel = event.headers["nightbot-channel"]
-      .split("&")[0]
-      .split("=")[1];
+    const channel = event.headers["nightbot-channel"].split("&")[0].split("=")[1];
 
-    const mayorIndex = event.queryStringParameters["mayor_index"] - 1;
-    const mayor = event.queryStringParameters["mayor"];
+    const mayorIndex = event.queryStringParameters["mayor_index_mayor_name"].split(/ (.+)/)[0];
+    const mayor = event.queryStringParameters["mayor_index_mayor_name"].split(/ (.+)/)[1];
 
     let faunaDBQuery;
 
@@ -25,11 +23,7 @@ exports.handler = async function (event, context, callback) {
       return response.data;
     });
 
-    if (
-      mayors &&
-      Boolean(mayors.length) &&
-      Boolean(mayors[0].data.mayors.length)
-    ) {
+    if (mayors && Boolean(mayors.length) && Boolean(mayors[0].data.mayors.length)) {
       console.log(1234, mayors[0].data.mayors);
       mayors[0].data.mayors[mayorIndex] = mayor;
 
