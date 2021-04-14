@@ -12,7 +12,7 @@ exports.handler = async function (event, context, callback) {
       .split("=")[1];
 
     const mayorIndex = event.queryStringParameters["mayor_index"] - 1;
-    const mayor = event.queryStringParameters["mayor"] - 1;
+    const mayor = event.queryStringParameters["mayor"];
 
     let faunaDBQuery;
 
@@ -59,7 +59,7 @@ exports.handler = async function (event, context, callback) {
 
         return {
           statusCode: 200,
-          body: JSON.stringify("Mayor fired."),
+          body: JSON.stringify("Mayor Renamed."),
         };
       })
       .catch((error) => {
