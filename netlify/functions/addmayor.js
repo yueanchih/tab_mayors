@@ -1,3 +1,12 @@
+// todo:
+// realised that there is a way to reduce double query
+// first query to update, regardless of knowing the channel document exists
+// if data: [] was returned, that means the channel doesn't exist
+// and we can create a new document instead anyway
+// doing so, makes the second query conditional
+// since document creation happens only once in a channel's lifetime
+// the first query is redundant for most of the time
+
 const faunadb = require("faunadb");
 
 const q = faunadb.query;
