@@ -1,26 +1,20 @@
-# They Are Billions mayors API (WIP)
+# They Are Billions mayors API
 
-This is going to be an API for bots like nightbot to communicate between a server API to maintain the mayors.
-Essentially it has to be an array of strings.
-Be patient until this gets cooked 👨‍🍳
-
-<br>
-
-## Update 15.04.2021
-
-I got all of the functionalities working. A bit of redundant code, but that's okay for now.
+This is the code to create endpoints for Twitch bots to communicate between a databse to maintain the mayors.
 
 <br>
 
 # Installation
 
-You will need 3 services; a bot to execute the commands, a server to create endpoints and a database to store the mayors.
+You will need 3 services:
 
-A bot for Twitch like Nightbot or Streamlabs.
+- A bot for Twitch like Nightbot or Streamlabs.
 
-Serverless services like Netlify or Vercel.
+- Serverless services like Netlify or Vercel.
 
-A database like FaunaDB, DynamoDB or Firebase.
+- A database like FaunaDB, DynamoDB or Firebase.
+
+<br>
 
 ## Steps
 
@@ -28,7 +22,7 @@ A database like FaunaDB, DynamoDB or Firebase.
 
 2. Create Netlify account.
 
-3. In Netlify, create a new site and connect the repo to it. It automatically builds it and gives you a URL. Keep it for the last step.
+3. In Netlify, create a new site with the forked repo. It automatically builds it and gives you a URL. Keep it for the last step.
 
 4. Create FaunaDB account.
 
@@ -42,9 +36,11 @@ A database like FaunaDB, DynamoDB or Firebase.
 
    Create a new variable `FAUNADB_SERVER_SECRET` and assign the FaunaDB secret to it.
 
-6. Setup 5 custom commands in Nightbot
+6. Setup custom commands in Nightbot
 
-   ⚠ Replace your Netlify site URL here.
+   ⚠ REPLACE your Netlify site URL in each command! ⚠
+
+   <br>
 
    👉 Command `!addmayor`
 
@@ -74,6 +70,10 @@ A database like FaunaDB, DynamoDB or Firebase.
 
    📝 Message `$(eval const api = $(urlfetch https://YOUR_NETLIFY_SUBDOMAIN.netlify.app/.netlify/functions/deletemayors); api)`
 
+7. Test the commands 🎉 They should work. They work on my machine 😉
+
+Open an issue if they didn't 😕 I'll try to figure it out 👍
+
 <br>
 
 # Modifying the Bot Responses
@@ -82,4 +82,6 @@ Although it is possible to have the messages managed by the bots, but it's bette
 
 To change them, you can search and modify in github or locally in your code editor. All 5 files are under [./netlify/functions](./netlify/functions)
 
-Example `body: JSON.stringify(["Mayor bucket is empty already."]),` in [./netlify/functions/deletemayor.js:44](netlify/functions/deletemayor.js#L44)
+Example:
+
+`body: JSON.stringify(["Mayor bucket is empty already."]),` in [./netlify/functions/deletemayor.js:44](netlify/functions/deletemayor.js#L44)
