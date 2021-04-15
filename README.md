@@ -82,4 +82,4 @@ Although it is possible to have the messages managed by the bots, but it's bette
 
 To change them, you can search and modify in github or locally in your code editor. All 5 files are under [./netlify/functions](./netlify/functions)
 
-Example `body: JSON.stringify(["Mayor bucket is empty already."]),` in [./netlify/functions/deletemayors.js:44](netlify/functions/deletemayors.js#L44)
+Example `body: JSON.stringify(["Mayor bucket is empty already."]),` in [./netlify/functions/deletemayor.js:44](netlify/functions/deletemayor.js#L44)
