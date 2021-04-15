@@ -26,7 +26,7 @@ You will need 3 services:
 
 4. Create FaunaDB account.
 
-   In FaunaDB create a database and name it **mayors**. Create a collection called **mayors** as well.
+   In FaunaDB create a database and name it `mayors`. Create a collection called `mayors` as well.
 
    Under the same database, go to **Security** and create a **key**. Keep it for the next step.
 
@@ -72,7 +72,7 @@ You will need 3 services:
 
 7. Test the commands 🎉 They should work. They work on my machine 😉
 
-Open an issue if they didn't 😕 I'll try to figure it out 👍
+   Open an issue if they didn't 😕 I'll try to figure it out 👍
 
 <br>
 
@@ -80,7 +80,9 @@ Open an issue if they didn't 😕 I'll try to figure it out 👍
 
 Although it is possible to have the messages managed by the bots, but it's better to have it managed by the code. There are different scenarios where the bot custom command string gets too long and hard to maintain.
 
-To change them, you can search and modify in github or locally in your code editor. All 5 files are under [./netlify/functions](./netlify/functions)
+To change them, you can search and modify in github or locally in your code editor.
+
+All 5 important files are under [./netlify/functions](./netlify/functions)
 
 Example:
 
