@@ -4,23 +4,35 @@ This is going to be an API for bots like nightbot to communicate between a serve
 Essentially it has to be an array of strings.
 Be patient until this gets cooked 👨‍🍳
 
-# Update 15.04.2021
+<br>
+
+## Update 15.04.2021
 
 I got all of the functionalities working. A bit of redundant code, but that's okay for now.
+
+<br>
 
 # Installation
 
 You will need 3 services; a bot to execute the commands, a server to create endpoints and a database to store the mayors.
 
-1. Clone or Fork this repo.
+A bot for Twitch like Nightbot or Streamlabs.
 
-2. Create Netlify (or Vercel) account.
+Serverless services like Netlify or Vercel.
+
+A database like FaunaDB, DynamoDB or Firebase.
+
+## Steps
+
+1. Fork this repo.
+
+2. Create Netlify account.
 
 3. In Netlify, create a new site and connect the repo to it. It automatically builds it and gives you a URL. Keep it for the last step.
 
 4. Create FaunaDB account.
 
-   In FaunaDB create a database name it **mayors**. Create a collection called **mayors** as well.
+   In FaunaDB create a database and name it **mayors**. Create a collection called **mayors** as well.
 
    Under the same database, go to **Security** and create a **key**. Keep it for the next step.
 
@@ -30,7 +42,7 @@ You will need 3 services; a bot to execute the commands, a server to create endp
 
    Create a new variable `FAUNADB_SERVER_SECRET` and assign the FaunaDB secret to it.
 
-6. Setup 5 Nightbot (or other bots) custom commands like so:
+6. Setup 5 custom commands in Nightbot
 
    ⚠ Replace your Netlify site URL here.
 
@@ -66,6 +78,8 @@ You will need 3 services; a bot to execute the commands, a server to create endp
 
 # Modifying the Bot Responses
 
-This is managed inside the code you cloned / forked. You can easily do a global search and find them.
+Although it is possible to have the messages managed by the bots, but it's better to have it managed by the code. There are different scenarios where the bot custom command string gets too long and hard to maintain.
 
-Example `body: JSON.stringify(["Mayor bucket is empty already."]),` in [./netlify/functions/deletemayors.js:44](netlify/functions/deletemayors.js:44)
+To change them, you can search and modify in github or locally in your code editor. All 5 files are under [./netlify/functions](./netlify/functions)
+
+Example `body: JSON.stringify(["Mayor bucket is empty already."]),` in [./netlify/functions/deletemayors.js:44](netlify/functions/deletemayors.js#L44)
