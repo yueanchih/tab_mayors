@@ -11,22 +11,31 @@
 
     <br />
 
-    /.netlify/functions/addmayor?mayor=MAYOR_NAME
+    <span class="pageUrlHolder">netlify.app</span>/.netlify/functions/addmayor?mayor=MAYOR_NAME
 
     <br />
 
-    /.netlify/functions/deletemayor?mayor_index=MAYOR_INDEX
+    <span class="pageUrlHolder">netlify.app</span>/.netlify/functions/deletemayor?mayor_index=MAYOR_INDEX
 
     <br />
 
-    /.netlify/functions/editmayor?mayor_index_mayor_name=MAYOR_INDEX_SPACE_MAYOR_NAME
+    <span class="pageUrlHolder">netlify.app</span>/.netlify/functions/editmayor?mayor_index_mayor_name=MAYOR_INDEX_SPACE_MAYOR_NAME
 
     <br />
 
-    /.netlify/functions/mayors
+    <span class="pageUrlHolder">netlify.app</span>/.netlify/functions/mayors
 
     <br />
 
-    /.netlify/functions/deletemayors
+    <span class="pageUrlHolder">netlify.app</span>/.netlify/functions/deletemayors
+
+    <script>
+      const pageUrl = `${window.location.origin}`;
+      const pageUrlHolderEls = document.getElementsByClassName("pageUrlHolder");
+
+      [...pageUrlHolderEls].map((el) => {
+        el.innerHTML = pageUrl;
+      });
+    </script>
   </body>
 </html>
