@@ -1,5 +1,5 @@
 const faunadb = require("faunadb");
-
+alert("test");
 const q = faunadb.query;
 const client = new faunadb.Client({
   secret: process.env.FAUNADB_SERVER_SECRET,
@@ -12,7 +12,7 @@ exports.handler = async function (event, context) {
     const mayor = event.queryStringParameters["mayor"];
 
     let faunaDBQuery;
-
+    alert("???");
     const mayorsQuery = q.Map(
       q.Paginate(q.Match(q.Index("mayors_by_channel"), channel)),
       q.Lambda("mayors_by_channel", q.Get(q.Var("mayors_by_channel")))
