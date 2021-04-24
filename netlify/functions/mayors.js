@@ -16,7 +16,7 @@ exports.handler = async function (event, context, callback) {
   return client
     .query(faunaDBQuery)
     .then((response) => {
-      console.log(1, response.data[0].data.mayors);
+      //console.log(1, response.data[0].data.mayors);
       const jj =
         response.data.length && response.data[0].data.mayors.length
           ? [response.data[0].data.mayors.join(", ")]
